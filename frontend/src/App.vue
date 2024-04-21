@@ -1,16 +1,11 @@
 <script setup>
 import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
+import Movies from "./components/Movies.vue";
 </script>
 
 <template>
-  <header>
-    <div class="blue">
-      <HelloWorld msg="Welcome to..." />
-    </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <HelloWorld msg="Webb_Server" />
+    <Movies />
+    
 </template>
