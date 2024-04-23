@@ -7,5 +7,5 @@ import Movies from "./components/Movies.vue";
 
     <HelloWorld msg="Webb_Server" />
     <Movies />
-    
+
 </template>
