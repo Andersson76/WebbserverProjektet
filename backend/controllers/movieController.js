@@ -1,6 +1,6 @@
-const connectionMySQL = require("./../connectionMySQL");
+const connectionMySQL = require("../connectionMySQL");
 
-exports.getBooks = async (req, res) => {
+exports.getMovies = async (req, res) => {
   let sql = "SELECT * FROM movies";
   try {
     await connectionMySQL.query(sql, (error, results, fields) => {
@@ -16,11 +16,11 @@ exports.getBooks = async (req, res) => {
   }
 };
 
-exports.getBook = async (req, res) => {
+exports.getMovie = async (req, res) => {
   const { id } = req.params;
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
-  let sql = "SELECT * FROM movies WHERE movieID = ?";
+  let sql = "SELECT * FROM movies WHERE movieId = ?";
   try {
     await connectionMySQL.query(sql, [id], (error, results, fields) => {
       if (error) {
@@ -40,7 +40,7 @@ exports.createBook = async (req, res) => {
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
   let sql =
-    "INSERT INTO bok (bokForfattare, bokTitel, bokIsbn, bokPris, bokKategoriId) VALUES (?,?,?,?,?)";
+    "INSERT INTO movies ( bokTitel, bokIsbn, bokPris, bokKategoriId) VALUES (?,?,?,?,?)";
   let params = [bokForfattare, bokTitel, bokIsbn, bokPris, bokKategoriId];
 
   if (!bokIsbn || bokIsbn.trim().length < 1) {
