@@ -10,13 +10,13 @@
       >
         <li
           v-for="movie in movies"
-          :key="movie.id"
+          :key="movie.ID"
           class="bg-white rounded-lg shadow-md p-4"
         >
-          <h2 class="text-lg font-semibold">{{ movie.title }}</h2>
-          <p class="text-gray-500">{{ movie.director }}</p>
+          <h2 class="text-lg font-semibold">{{ movie.Title }}</h2>
+          <p class="text-gray-500">{{ movie.Director }}</p>
           <button
-            @click="deleteMovie(movie.id)"
+            @click="deleteMovie(movie.ID)"
             class="bg-red-500 text-white px-4 py-2 rounded mt-2"
           >
             Ta bort
@@ -27,13 +27,13 @@
       <!-- Formulär för att lägga till en ny film -->
       <form class="mt-4 flex flex-col items-center" @submit.prevent="addMovie">
         <input
-          v-model="newMovie.title"
+          v-model="newMovie.Title"
           type="text"
           placeholder="Titel"
           class="border rounded px-2 py-1 mb-2 w-full"
         />
         <input
-          v-model="newMovie.director"
+          v-model="newMovie.Director"
           type="text"
           placeholder="Regissör"
           class="border rounded px-2 py-1 mb-2 w-full"
@@ -53,21 +53,51 @@
 import { ref } from "vue";
 
 const movies = ref([]);
-const newMovie = ref({ title: "", director: "" });
+const newMovie = ref({ movieTitle: "", movieDirector: "" });
 
 const fetchMovies = async () => {
-  // Anropa backend-API för att hämta filmer
-  // Tilldela resultatet till movies
+  try {
+    const response = await fetch("/api/books");
+    if (!response.ok) {
+      throw new Error("Failed to fetch movies");
+    }
+    movies.value = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const addMovie = async () => {
-  // Anropa backend-API för att lägga till en ny film med newMovie
-  // Uppdatera movies efteråt
+  try {
+    const response = await fetch("/api/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMovie.value),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to add movie");
+    }
+    newMovie.value = { movieTitle: "", movieDirector: "" }; // Nollställ formuläret
+    await fetchMovies(); // Uppdatera listan med filmer
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const deleteMovie = async (id) => {
-  // Anropa backend-API för att ta bort filmen med det givna id:t
-  // Uppdatera movies efteråt
+  try {
+    const response = await fetch(`/api/movies/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete movie");
+    }
+    await fetchMovies(); // Uppdatera listan med filmer
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 fetchMovies(); // Hämta filmer när komponenten skapas
