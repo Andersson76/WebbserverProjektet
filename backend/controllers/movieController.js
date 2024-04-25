@@ -35,18 +35,18 @@ exports.getMovie = async (req, res) => {
   }
 };
 
-exports.createBook = async (req, res) => {
-  const { bokForfattare, bokTitel, bokIsbn, bokPris, bokKategoriId } = req.body;
+exports.createMovie = async (req, res) => {
+  const { movieTitle, movieRating } = req.body;
 
+  // använder ADD
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
-  let sql =
-    "INSERT INTO movies ( bokTitel, bokIsbn, bokPris, bokKategoriId) VALUES (?,?,?,?,?)";
-  let params = [bokForfattare, bokTitel, bokIsbn, bokPris, bokKategoriId];
+  let sql = "INSERT INTO movies ( movieTitle, movieRating ) VALUES (?,?)";
+  let params = [movieTitle, movieRating];
 
-  if (!bokIsbn || bokIsbn.trim().length < 1) {
+  if (!movieRating || movieRating.trim().length < 3) {
     return res.status(400).json({
       success: false,
-      error: "Du har inte skrivit in något ISBN för boken",
+      error: "Du har inte skrivit in någon rating för filmen",
     });
   }
 
@@ -58,7 +58,7 @@ exports.createBook = async (req, res) => {
       return res.status(201).json({
         success: true,
         error: "",
-        message: "Du har lagt till en ny bok!",
+        message: "Du har lagt till en ny film!",
       });
     });
   } catch (error) {
@@ -69,33 +69,33 @@ exports.createBook = async (req, res) => {
   }
 };
 
-exports.updateBook = async (req, res) => {
-  const { bokForfattare, bokTitel, bokIsbn, bokPris, bokKategoriId, bokId } =
-    req.body;
+// UPDATE
+exports.updateMovie = async (req, res) => {
+  const { movieTitle, movieRating, movieId } = req.body;
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
   let sql =
-    "UPDATE bok SET bokForfattare = ?, bokTitel = ?, bokIsbn = ?, bokPris = ?, bokKategoriId = ? WHERE bokId = ?";
+    "UPDATE movie SET movieTitle = ?, movieRating = ?,  movieDirectorId = ?, movieGenreId = ?, movieWriterId = ?, movieMainActorId = ? WHERE movieId = ?";
   let params = [
-    bokForfattare,
-    bokTitel,
-    bokIsbn,
-    bokPris,
-    bokKategoriId,
-    bokId,
+    movieTitle,
+    movieRating,
+    movieDirectorId,
+    movieGenreId,
+    movieWriterId,
+    movieMainActorId,
   ];
 
-  if (!bokIsbn || bokIsbn.trim().length < 1) {
+  if (!movieRating || movieRating.trim().length < 3) {
     return res.status(400).json({
       success: false,
-      error: "Du har inte skrivit in något ISBN för boken",
+      error: "Du har inte skrivit in någon rating för filmen",
     });
   }
 
-  if (!bokId) {
+  if (!movieId) {
     return res.status(400).json({
       success: false,
-      error: "Du har inte skrivit in något ID för boken du ska uppdatera!",
+      error: "Du har inte skrivit in något ID för filmen du ska uppdatera!",
     });
   }
 
