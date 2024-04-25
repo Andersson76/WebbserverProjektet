@@ -25,7 +25,7 @@ CREATE TABLE writers (
 CREATE TABLE movies(
 	movieId INT NOT NULL AUTO_INCREMENT,
 	movieTitle VARCHAR(50) UNIQUE,
-    movieRating VARCHAR(10),
+    movieRating VARCHAR(10) NOT NULL,
    	movieDirectorId INT,
     movieGenreId INT,
     movieWriterId INT,
