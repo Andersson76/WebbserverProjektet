@@ -75,8 +75,9 @@ exports.updateMovie = async (req, res) => {
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
   let sql =
-    "UPDATE movie SET movieTitle = ?, movieRating = ?,  movieDirectorId = ?, movieGenreId = ?, movieWriterId = ?, movieMainActorId = ? WHERE movieId = ?";
+    "UPDATE movies SET movieTitle = ?, movieRating = ?, movieDirectorId = ?, movieGenreId = ?, movieWriterId = ?, movieMainActorId = ? WHERE movieId = ?";
   let params = [
+    movieId,
     movieTitle,
     movieRating,
     movieDirectorId,
@@ -85,19 +86,19 @@ exports.updateMovie = async (req, res) => {
     movieMainActorId,
   ];
 
-  if (!movieRating || movieRating.trim().length < 3) {
-    return res.status(400).json({
-      success: false,
-      error: "Du har inte skrivit in någon rating för filmen",
-    });
-  }
+  // if (!movieRating || movieRating.trim().length < 3) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     error: "Du har inte skrivit in någon rating för filmen",
+  //   });
+  // }
 
-  if (!movieId) {
-    return res.status(400).json({
-      success: false,
-      error: "Du har inte skrivit in något ID för filmen du ska uppdatera!",
-    });
-  }
+  // if (!movieId) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     error: "Du har inte skrivit in något ID för filmen du ska uppdatera!",
+  //   });
+  // }
 
   try {
     await connectionMySQL.query(sql, params, (error, results, fields) => {
