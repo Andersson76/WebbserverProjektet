@@ -86,19 +86,19 @@ exports.updateMovie = async (req, res) => {
     movieMainActorId,
   ];
 
-  // if (!movieRating || movieRating.trim().length < 3) {
-  //   return res.status(400).json({
-  //     success: false,
-  //     error: "Du har inte skrivit in någon rating för filmen",
-  //   });
-  // }
+  if (!movieRating || movieRating.trim().length < 3) {
+    return res.status(400).json({
+      success: false,
+      error: "Du har inte skrivit in någon rating för filmen",
+    });
+  }
 
-  // if (!movieId) {
-  //   return res.status(400).json({
-  //     success: false,
-  //     error: "Du har inte skrivit in något ID för filmen du ska uppdatera!",
-  //   });
-  // }
+  if (!movieId) {
+    return res.status(400).json({
+      success: false,
+      error: "Du har inte skrivit in något ID för filmen du ska uppdatera!",
+    });
+  }
 
   try {
     await connectionMySQL.query(sql, params, (error, results, fields) => {
