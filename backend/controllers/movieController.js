@@ -118,21 +118,21 @@ exports.updateMovie = async (req, res) => {
   }
 };
 
-exports.deleteBook = async (req, res) => {
-  const { bokId } = req.body;
+exports.deleteMovie = async (req, res) => {
+  const { id } = req.body;
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
-  let sql = "DELETE FROM movie WHERE movieID = ?";
+  let sql = "DELETE  FROM movies WHERE movieId = ?";
 
-  if (!bokId) {
+  if (!id) {
     return res.status(400).json({
       success: false,
-      error: "Du har inte skrivit in något ID för boken du ska radera!",
+      error: "Du har inte skrivit in något ID för filmen du ska radera!",
     });
   }
 
   try {
-    await connectionMySQL.query(sql, [bokId], (error, results, fields) => {
+    await connectionMySQL.query(sql, [id], (error, results, fields) => {
       if (error) {
         if (error) throw error;
       }
@@ -150,7 +150,7 @@ exports.deleteBook = async (req, res) => {
   }
 };
 
-exports.getBooksCategories = async (req, res) => {
+exports.getmovieCategories = async (req, res) => {
   let sql =
     "SELECT * FROM movies INNER JOIN genre ON movies.genreID = genre.genreID";
 
