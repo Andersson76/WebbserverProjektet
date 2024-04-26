@@ -150,7 +150,7 @@ exports.deleteMovie = async (req, res) => {
   }
 };
 
-exports.getmovieCategories = async (req, res) => {
+exports.getMovieGenre = async (req, res) => {
   let sql =
     "SELECT * FROM movies INNER JOIN genre ON movies.genreID = genre.genreID";
 
