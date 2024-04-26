@@ -1,7 +1,7 @@
 const connectionMySQL = require("../connectionMySQL");
 
-exports.getGenres = async (req, res) => {
-  let sql = "SELECT * FROM genres";
+exports.getGenre = async (req, res) => {
+  let sql = "SELECT * FROM genre";
   try {
     await connectionMySQL.query(sql, (error, results, fields) => {
       if (error) {
