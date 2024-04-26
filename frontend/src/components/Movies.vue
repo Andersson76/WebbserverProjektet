@@ -58,7 +58,7 @@ const newMovie = ref({ movieTitle: "", movieDirector: "" });
 const fetchMovies = async () => {
   try {
     console.log("Fetching movies...");
-    const response = await fetch("/api/movies");
+    const response = await fetch("http://localhost:3000/api/movies");
     console.log("Response status:", response.status);
     if (!response.ok) {
       throw new Error("Failed to fetch movies");
@@ -72,7 +72,7 @@ const fetchMovies = async () => {
 
 const addMovie = async () => {
   try {
-    const response = await fetch("/api/movies", {
+    const response = await fetch("http://localhost:3000/api/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const addMovie = async () => {
 
 const deleteMovie = async (id) => {
   try {
-    const response = await fetch(`/api/movies/${id}`, {
+    const response = await fetch(`http://localhost:3000/api/movies/${id}`, {
       method: "DELETE",
     });
     if (!response.ok) {
