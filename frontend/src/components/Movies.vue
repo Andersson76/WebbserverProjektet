@@ -10,13 +10,13 @@
       >
         <li
           v-for="movie in movies"
-          :key="movie.ID"
+          :key="movie.movieId"
           class="bg-white rounded-lg shadow-md p-4"
         >
-          <h2 class="text-lg font-semibold">{{ movie.Title }}</h2>
-          <p class="text-gray-500">{{ movie.Director }}</p>
+          <h2 class="text-lg font-semibold">{{ movieTitle }}</h2>
+          <p class="text-gray-500">{{ movieDirector }}</p>
           <button
-            @click="deleteMovie(movie.ID)"
+            @click="deleteMovie(movieId)"
             class="bg-red-500 text-white px-4 py-2 rounded mt-2"
           >
             Ta bort
@@ -27,13 +27,13 @@
       <!-- Formulär för att lägga till en ny film -->
       <form class="mt-4 flex flex-col items-center" @submit.prevent="addMovie">
         <input
-          v-model="newMovie.Title"
+          v-model="newMovie.movieTitle"
           type="text"
           placeholder="Titel"
           class="border rounded px-2 py-1 mb-2 w-full"
         />
         <input
-          v-model="newMovie.Director"
+          v-model="newMovie.movieDirector"
           type="text"
           placeholder="Regissör"
           class="border rounded px-2 py-1 mb-2 w-full"
@@ -57,11 +57,14 @@ const newMovie = ref({ movieTitle: "", movieDirector: "" });
 
 const fetchMovies = async () => {
   try {
-    const response = await fetch("/api/books");
+    console.log("Fetching movies...");
+    const response = await fetch("/api/movies");
+    console.log("Response status:", response.status);
     if (!response.ok) {
       throw new Error("Failed to fetch movies");
     }
     movies.value = await response.json();
+    console.log("Fetched movies:", movies.value);
   } catch (error) {
     console.error(error);
   }
@@ -69,7 +72,7 @@ const fetchMovies = async () => {
 
 const addMovie = async () => {
   try {
-    const response = await fetch("/api/books", {
+    const response = await fetch("/api/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
