@@ -13,8 +13,8 @@
           :key="movie.movieId"
           class="bg-white rounded-lg shadow-md p-4"
         >
-          <h2 class="text-lg font-semibold">{{ movieTitle }}</h2>
-          <p class="text-gray-500">{{ movieDirector }}</p>
+          <h2 class="text-lg font-semibold">{{ movie.movieTitle }}</h2>
+          <p class="text-gray-500">{{ movie.movieRating }}</p>
           <button
             @click="deleteMovie(movieId)"
             class="bg-red-500 text-white px-4 py-2 rounded mt-2"
@@ -32,12 +32,12 @@
           placeholder="Titel"
           class="border rounded px-2 py-1 mb-2 w-full"
         />
-        <input
+        <!-- <input
           v-model="newMovie.movieDirector"
           type="text"
           placeholder="Regissör"
           class="border rounded px-2 py-1 mb-2 w-full"
-        />
+        /> -->
         <button
           type="submit"
           class="bg-blue-500 text-white px-4 py-2 mt-2 rounded"
@@ -53,17 +53,17 @@
 import { ref } from "vue";
 
 const movies = ref([]);
-const newMovie = ref({ movieTitle: "", movieDirector: "" });
+const newMovie = ref({ movieTitle: "" });
 
 const fetchMovies = async () => {
   try {
-    console.log("Fetching movies...");
     const response = await fetch("http://localhost:3000/api/movies");
-    console.log("Response status:", response.status);
+
     if (!response.ok) {
       throw new Error("Failed to fetch movies");
     }
     movies.value = await response.json();
+
     console.log("Fetched movies:", movies.value);
   } catch (error) {
     console.error(error);
@@ -82,7 +82,7 @@ const addMovie = async () => {
     if (!response.ok) {
       throw new Error("Failed to add movie");
     }
-    newMovie.value = { movieTitle: "", movieDirector: "" }; // Nollställ formuläret
+    newMovie.value = { movieTitle: "" }; // Nollställ formuläret
     await fetchMovies(); // Uppdatera listan med filmer
   } catch (error) {
     console.error(error);
