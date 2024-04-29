@@ -15,8 +15,10 @@ app.use(express.static('public'));
 
 const movieRoutes = require('./routes/movieRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const writerRoutes = require('./routes/writerRoutes');
 
 app.use(movieRoutes);
 app.use(categoryRoutes);
+app.use(writerRoutes);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
