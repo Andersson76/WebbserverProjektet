@@ -76,3 +76,58 @@ SET movieRating= 7.1, movieWriterId= 3 WHERE movieId= 3;
 
 UPDATE movies
 SET movieRating= 6.7, movieTitle= 'Dirty Harry, The Original', movieWriterId= 4 WHERE movieId= 4;
+
+SELECT * FROM movies;
+SELECT * FROM mainActor;
+
+-- Skådespelare för The Green Mile
+INSERT INTO mainActor (mainActorName)
+VALUES
+('Tom Hanks'),
+('Michael Clark Duncan'),
+('Arnold Schwarzenegger'),
+('Linda Hamilton'),
+('Natalie Wood'),
+('George Chakiris'),
+('Clint Eastwood'),
+('Andrew Robinson');
+
+-- Uppdatera filmer med skådespelar The Green Mile
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Tom Hanks')
+WHERE movieTitle = 'The Green Mile';
+
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Michael Clark Duncan')
+WHERE movieTitle = 'The Green Mile';
+
+-- Uppdatera filmer med skådespelar Terminator
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Arnold Schwarzenegger')
+WHERE movieTitle = 'Terminator';
+
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Linda Hamilton')
+WHERE movieTitle = 'Terminator';
+
+-- Uppdatera filmer med skådespelar för West Side Story
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Natalie Wood')
+WHERE movieTitle = 'West Side Story';
+
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'George Chakiris')
+WHERE movieTitle = 'West Side Story';
+
+-- Uppdatera filmer med skådespelar Dirty Harry
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Clint Eastwood')
+WHERE movieTitle = 'Dirty Harry';
+
+UPDATE movies
+SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Andrew Robinson')
+WHERE movieTitle = 'Dirty Harry';
+
+SELECT movieTitle, mainActorName
+FROM movies
+JOIN mainActor a ON movieMainActorId = a.mainActorId;
