@@ -104,11 +104,11 @@ WHERE movieTitle = 'The Green Mile';
 -- Uppdatera filmer med skådespelar Terminator
 UPDATE movies
 SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Arnold Schwarzenegger')
-WHERE movieTitle = 'Terminator';
+WHERE movieTitle = 'Terminator, Dark Fate';
 
 UPDATE movies
 SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Linda Hamilton')
-WHERE movieTitle = 'Terminator';
+WHERE movieTitle = 'Terminator, Dark Fate';
 
 -- Uppdatera filmer med skådespelar för West Side Story
 UPDATE movies
@@ -119,14 +119,14 @@ UPDATE movies
 SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'George Chakiris')
 WHERE movieTitle = 'West Side Story';
 
--- Uppdatera filmer med skådespelar Dirty Harry
+-- Uppdatera filmer med skådespelar Dirty Harry, The Original
 UPDATE movies
 SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Clint Eastwood')
-WHERE movieTitle = 'Dirty Harry';
+WHERE movieTitle = 'Dirty Harry, The Original';
 
 UPDATE movies
 SET movieMainActorId = (SELECT mainActorId FROM mainActor WHERE mainActorName = 'Andrew Robinson')
-WHERE movieTitle = 'Dirty Harry';
+WHERE movieTitle = 'Dirty Harry, The Original';
 
 SELECT movieTitle, mainActorName
 FROM movies
