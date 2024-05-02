@@ -64,7 +64,7 @@ VALUES ('Stephen King'), ('David S. Goyer'), ('Tony Kushner'), ('Howard Klausner
 
 SELECT * from writers;
 
-
+-- Lägger till movieRating och uppdaterar movieTitle
 UPDATE movies
 SET movieRating= 8.6, movieWriterId= 1 WHERE movieId= 1;
 
