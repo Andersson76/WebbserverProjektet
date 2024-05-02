@@ -1,4 +1,4 @@
-const connectionMySQL = require("../connectionMySQL");
+/*const connectionMySQL = require("../connectionMySQL");
 
 exports.getGenre = async (req, res) => {
   let sql = "SELECT * FROM genre";
@@ -15,3 +15,4 @@ exports.getGenre = async (req, res) => {
     });
   }
 };
+*/
