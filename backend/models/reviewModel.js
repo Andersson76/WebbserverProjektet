@@ -1,4 +1,4 @@
-/*const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const ReviewSchema = new mongoose.Schema({
   movie: {
@@ -10,7 +10,7 @@ const ReviewSchema = new mongoose.Schema({
     required: true,
   },
   ratings: {
-    type: String,
+    type: Number,
     required: true,
   },
   comment: {
@@ -24,4 +24,3 @@ const ReviewSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("MovieReviews", ReviewSchema);
-*/

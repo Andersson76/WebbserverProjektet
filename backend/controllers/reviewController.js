@@ -1,4 +1,4 @@
-/*const reviewModel = require("../models/reviewModel");
+const reviewModel = require("../models/reviewModel");
 
 exports.getReview = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ exports.getReview = async (req, res) => {
   }
 };
 
-/* exports.getReview = async (req, res) => {
+ exports.getReview = async (req, res) => {
   const { id } = req.params;
   try {
     const theReview = await reviewModel.find({ id: id });
@@ -23,9 +23,9 @@ exports.getReview = async (req, res) => {
       error: error.message,
     });
   }
-}; */
+}; 
 
-/*
+
 exports.createBook = async (req, res) => {
   const {
     bookAuthor,
@@ -117,4 +117,4 @@ exports.deleteBookById = async (req, res) => {
       error: error.message,
     });
   }
-}; */
+}; 
