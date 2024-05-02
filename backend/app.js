@@ -19,11 +19,10 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const writerRoutes = require('./routes/writerRoutes');
 const mainActorRoutes = require("./routes/mainActorRoutes");
 
-
 const genreRoutes = require("./routes/genreRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const connectionMongoDB = require("./connectionMongoDB");
-connectionMongoDB();*/
+connectionMongoDB();
 
 const reviewRoutes = require("./routes/reviewRoutes");
 
