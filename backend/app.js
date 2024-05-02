@@ -19,7 +19,7 @@ const movieRoutes = require("./routes/movieRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const writerRoutes = require("./routes/writerRoutes");
 
-const connectionMongoDB = require("./connectionMongoDB");
+const connectionMongoDB = require("./connectionMongoDB")
 connectionMongoDB();
 
 app.use(categoryRoutes);
