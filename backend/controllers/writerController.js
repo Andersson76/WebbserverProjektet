@@ -113,7 +113,7 @@ exports.updateWriter = async (req, res) => {
   }
 };
 
-// Get movieWiter
+// INNER JOIN
 exports.getMovieWriter = async (req, res) => {
   let sql =
     "SELECT * FROM movies INNER JOIN writer ON movies.writerID = writer.writerID";
