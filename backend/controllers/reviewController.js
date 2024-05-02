@@ -13,7 +13,7 @@ exports.getReview = async (req, res) => {
   }
 };
 
- exports.getReview = async (req, res) => {
+exports.getReview = async (req, res) => {
   const { id } = req.params;
   try {
     const theReview = await reviewModel.find({ id: id });
@@ -23,29 +23,20 @@ exports.getReview = async (req, res) => {
       error: error.message,
     });
   }
-}; 
+};
 
-
-exports.createBook = async (req, res) => {
-  const {
-    bookAuthor,
-    bookTitle,
-    bookIsbn,
-    bookPrice,
-    bookCategory1,
-    bookCategory2,
-  } = req.body;
+exports.createReview = async (req, res) => {
+  const { movie, user, rating, comment } = req.body;
 
   try {
-    const newBook = new BookModel({
-      author: bookAuthor,
-      book: bookTitle,
-      isbn: bookIsbn,
-      price: bookPrice,
-      categories: [bookCategory1, bookCategory2],
+    const newReview = new reviewModel({
+      movie: movie,
+      user: user,
+      rating: rating,
+      comment: comment,
     });
-    const insertedBook = await newBook.save();
-    return res.status(201).json(insertedBook);
+    const insertedReview = await newReview.save();
+    return res.status(201).json(insertedReview);
   } catch (error) {
     return res.status(500).json({
       error: error.message,
@@ -117,4 +108,4 @@ exports.deleteBookById = async (req, res) => {
       error: error.message,
     });
   }
-}; 
+};
