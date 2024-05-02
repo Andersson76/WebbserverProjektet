@@ -20,17 +20,17 @@ const writerRoutes = require('./routes/writerRoutes');
 const mainActorRoutes = require("./routes/mainActorRoutes");
 
 
-// const genreRoutes = require("./routes/genreRoutes");
-/*const reviewRoutes = require("./routes/reviewRoutes");
+const genreRoutes = require("./routes/genreRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
 const connectionMongoDB = require("./connectionMongoDB");
 connectionMongoDB();*/
 
+const reviewRoutes = require("./routes/reviewRoutes");
 
 app.use(categoryRoutes);
-// app.use(genreRoutes);
+app.use(genreRoutes);
 app.use(movieRoutes);
-//app.use(reviewRoutes);
-
+app.use(reviewRoutes);
 app.use(writerRoutes);
 app.use(mainActorRoutes)
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
