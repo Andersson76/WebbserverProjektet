@@ -9,7 +9,7 @@ const ReviewSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  ratings: {
+  rating: {
     type: Number,
     required: true,
   },
@@ -17,10 +17,6 @@ const ReviewSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: String,
-    required: true,
-  },
 });
 
-module.exports = mongoose.model("MovieReviews", ReviewSchema);
+module.exports = mongoose.model("moviereview", ReviewSchema);

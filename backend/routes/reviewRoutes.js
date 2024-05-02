@@ -4,8 +4,9 @@ const reviewController = require("../controllers/reviewController");
 
 router.get("/api/review", reviewController.getReview);
 //router.get("/api/review/:id", reviewController.getReview);
-//router.post("/api/review", reviewController.createReview);
+// router.post("/api/review", reviewController.createReview);
+router.post("/api/review", reviewController.createReview);
 //router.put("/api/review", reviewController.updateReview);
-//router.delete("/api/review", reviewController.deleteReview); 
+//router.delete("/api/review", reviewController.deleteReview);
 
 module.exports = router;
