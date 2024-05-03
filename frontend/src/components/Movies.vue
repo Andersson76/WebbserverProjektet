@@ -27,13 +27,67 @@
       </ul>
 
       <!-- Formulär för att lägga till en ny film -->
-      <form @submit.prevent="addMovie">
-      <label>Filmtitel:</label>
-      <input type="text" v-model="movieTitle" required><br>
-      <label>Betyg:</label>
-      <input type="text" v-model="movieRating" required><br>
-      <button type="submit">Lägg till film</button>
-    </form>
+      <form @submit.prevent="addMovie" class="max-w-sm mx-auto mt-8">
+        <div class="mb-4">
+          <label for="movieTitle" class="block text-gray-700">Filmtitel:</label>
+          <input
+            type="text"
+            id="movieTitle"
+            v-model="movieTitle"
+            required
+            class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+          />
+        </div>
+        <div class="mb-4 border-gray-900">
+          <label for="movieRating" class="block text-gray-700">Betyg:</label>
+          <input
+            type="text"
+            id="movieRating"
+            v-model="movieRating"
+            required
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+          />
+        </div>
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+          >
+            Lägg till film
+          </button>
+        </div>
+      </form>
+      <!-- Formulär för att uppdatera film -->
+      <form @submit.prevent="updateMovie" class="max-w-sm mx-auto mt-8">
+        <div class="mb-4">
+          <label for="movieTitle" class="block text-gray-700">Filmtitel:</label>
+          <input
+            type="text"
+            id="movieTitle"
+            v-model="movieTitle"
+            required
+            class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+          />
+        </div>
+        <div class="mb-4 border-gray-900">
+          <label for="movieRating" class="block text-gray-700">Betyg:</label>
+          <input
+            type="text"
+            id="movieRating"
+            v-model="movieRating"
+            required
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+          />
+        </div>
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+          >
+            Uppdatera
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -75,6 +129,33 @@ const addMovie = async () => {
     const responseData = await response.json();
     if (responseData.success) {
       alert(responseData.message);
+      movieTitle.value = "";
+      movieRating.value = "";
+    } else {
+      alert(responseData.error);
+    }
+  } catch (error) {
+    console.error("Error adding movie:", error);
+  }
+};
+
+const updateMovie = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/movies", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        movieId: movieId.value,
+        movieTitle: movieTitle.value,
+        movieRating: movieRating.value,
+      }),
+    });
+    const responseData = await response.json();
+    if (responseData.success) {
+      alert(responseData.message);
+      movieId.value = "";
       movieTitle.value = "";
       movieRating.value = "";
     } else {
