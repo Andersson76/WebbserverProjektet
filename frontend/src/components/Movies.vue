@@ -68,7 +68,7 @@
             <input
               type="text"
               id="movieTitle"
-              v-model="movieTitle"
+              v-model="updateMovieTitle"
               required
               class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
             />
@@ -78,7 +78,7 @@
             <input
               type="text"
               id="movieRating"
-              v-model="movieRating"
+              v-model="updateMovieRating"
               required
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
             />
