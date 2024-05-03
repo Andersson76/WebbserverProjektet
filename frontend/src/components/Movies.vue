@@ -14,37 +14,26 @@
           class="bg-white rounded-lg shadow-md p-4"
         >
           <h2 class="text-lg font-semibold">{{ movie.movieTitle }}</h2>
+          <h2 class="text-lg font-semibold">{{ movie.movieGenreId }}</h2>
+
           <p class="text-gray-500">{{ movie.movieRating }}</p>
-          <button
+          <!-- <button
             @click="deleteMovie(movieId)"
             class="bg-red-500 text-white px-4 py-2 rounded mt-2"
           >
             Ta bort
-          </button>
+          </button> -->
         </li>
       </ul>
 
       <!-- Formulär för att lägga till en ny film -->
-      <form class="mt-4 flex flex-col items-center" @submit.prevent="addMovie">
-        <input
-          v-model="newMovie.movieTitle"
-          type="text"
-          placeholder="Titel"
-          class="border rounded px-2 py-1 mb-2 w-full"
-        />
-        <!-- <input
-          v-model="newMovie.movieDirector"
-          type="text"
-          placeholder="Regissör"
-          class="border rounded px-2 py-1 mb-2 w-full"
-        /> -->
-        <button
-          type="submit"
-          class="bg-blue-500 text-white px-4 py-2 mt-2 rounded"
-        >
-          Lägg till film
-        </button>
-      </form>
+      <form @submit.prevent="addMovie">
+      <label>Filmtitel:</label>
+      <input type="text" v-model="movieTitle" required><br>
+      <label>Betyg:</label>
+      <input type="text" v-model="movieRating" required><br>
+      <button type="submit">Lägg till film</button>
+    </form>
     </div>
   </div>
 </template>
@@ -70,6 +59,9 @@ const fetchMovies = async () => {
   }
 };
 
+const movieTitle = ref("");
+const movieRating = ref("");
+
 const addMovie = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/movies", {
@@ -77,19 +69,25 @@ const addMovie = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newMovie.value),
+      body: JSON.stringify({
+        movieTitle: movieTitle.value,
+        movieRating: movieRating.value,
+      }),
     });
-    if (!response.ok) {
-      throw new Error("Failed to add movie");
+    const responseData = await response.json();
+    if (responseData.success) {
+      alert(responseData.message);
+      movieTitle.value = "";
+      movieRating.value = "";
+    } else {
+      alert(responseData.error);
     }
-    newMovie.value = { movieTitle: "" }; // Nollställ formuläret
-    await fetchMovies(); // Uppdatera listan med filmer
   } catch (error) {
-    console.error(error);
+    console.error("Error adding movie:", error);
   }
 };
 
-const deleteMovie = async (id) => {
+/* const deleteMovie = async (id) => {
   try {
     const response = await fetch(`http://localhost:3000/api/movies/${id}`, {
       method: "DELETE",
@@ -101,7 +99,7 @@ const deleteMovie = async (id) => {
   } catch (error) {
     console.error(error);
   }
-};
+}; */
 
 fetchMovies(); // Hämta filmer när komponenten skapas
 </script>
