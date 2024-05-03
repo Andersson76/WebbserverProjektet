@@ -1,7 +1,7 @@
 <template>
-  <div class="container mx-auto mt-20 p-4 text-2xl font-bold lg:text-4xl">
+  <div class="container mx-auto p-4 text-2xl font-bold lg:text-4xl">
     <!-- Rubrik "Filmer" -->
-    <h1 class="text-center mb-4">Filmer</h1>
+    <h1 class="text-center my-8">Filmer</h1>
 
     <!-- Lista med filmer -->
     <div class="flex flex-col items-center">
@@ -25,69 +25,74 @@
           </button> -->
         </li>
       </ul>
-
-      <!-- Formulär för att lägga till en ny film -->
-      <form @submit.prevent="addMovie" class="max-w-sm mx-auto mt-8">
-        <div class="mb-4">
-          <label for="movieTitle" class="block text-gray-700">Filmtitel:</label>
-          <input
-            type="text"
-            id="movieTitle"
-            v-model="movieTitle"
-            required
-            class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-          />
-        </div>
-        <div class="mb-4 border-gray-900">
-          <label for="movieRating" class="block text-gray-700">Betyg:</label>
-          <input
-            type="text"
-            id="movieRating"
-            v-model="movieRating"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-          />
-        </div>
-        <div class="mt-4">
-          <button
-            type="submit"
-            class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-          >
-            Lägg till film
-          </button>
-        </div>
-      </form>
-      <!-- Formulär för att uppdatera film -->
-      <form @submit.prevent="updateMovie" class="max-w-sm mx-auto mt-8">
-        <div class="mb-4">
-          <label for="movieTitle" class="block text-gray-700">Filmtitel:</label>
-          <input
-            type="text"
-            id="movieTitle"
-            v-model="movieTitle"
-            required
-            class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-          />
-        </div>
-        <div class="mb-4 border-gray-900">
-          <label for="movieRating" class="block text-gray-700">Betyg:</label>
-          <input
-            type="text"
-            id="movieRating"
-            v-model="movieRating"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-          />
-        </div>
-        <div class="mt-4">
-          <button
-            type="submit"
-            class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-          >
-            Uppdatera
-          </button>
-        </div>
-      </form>
+      <div class="flex justify-center gap-4 my-8">
+        <!-- Formulär för att lägga till en ny film -->
+        <form @submit.prevent="addMovie" class="max-w-sm mx-auto mt-8">
+          <div class="mb-4">
+            <label for="movieTitle" class="block text-gray-700"
+              >Filmtitel:</label
+            >
+            <input
+              type="text"
+              id="movieTitle"
+              v-model="movieTitle"
+              required
+              class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+            />
+          </div>
+          <div class="mb-4 border-gray-900">
+            <label for="movieRating" class="block text-gray-700">Betyg:</label>
+            <input
+              type="text"
+              id="movieRating"
+              v-model="movieRating"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+            />
+          </div>
+          <div class="mt-4">
+            <button
+              type="submit"
+              class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+            >
+              Lägg till film
+            </button>
+          </div>
+        </form>
+        <!-- Formulär för att uppdatera film -->
+        <form @submit.prevent="updateMovie" class="max-w-sm mx-auto mt-8">
+          <div class="mb-4">
+            <label for="movieTitle" class="block text-gray-700"
+              >Filmtitel:</label
+            >
+            <input
+              type="text"
+              id="movieTitle"
+              v-model="movieTitle"
+              required
+              class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+            />
+          </div>
+          <div class="mb-4 border-gray-900">
+            <label for="movieRating" class="block text-gray-700">Betyg:</label>
+            <input
+              type="text"
+              id="movieRating"
+              v-model="movieRating"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+            />
+          </div>
+          <div class="mt-4">
+            <button
+              type="submit"
+              class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+            >
+              Uppdatera
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
