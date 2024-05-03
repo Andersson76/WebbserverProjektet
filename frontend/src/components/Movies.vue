@@ -42,7 +42,8 @@
 import { ref } from "vue";
 
 const movies = ref([]);
-const newMovie = ref({ movieTitle: "" });
+const movieTitle = ref("");
+const movieRating = ref("");
 
 const fetchMovies = async () => {
   try {
@@ -58,9 +59,6 @@ const fetchMovies = async () => {
     console.error(error);
   }
 };
-
-const movieTitle = ref("");
-const movieRating = ref("");
 
 const addMovie = async () => {
   try {
