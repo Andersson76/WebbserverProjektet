@@ -62,6 +62,18 @@
         <!-- Formulär för att uppdatera film -->
         <form @submit.prevent="updateMovie" class="max-w-sm mx-auto mt-8">
           <div class="mb-4">
+            <label for="updateMovieId" class="block text-gray-700"
+              >Film-ID:</label
+            >
+            <input
+              type="text"
+              id="updateMovieId"
+              v-model="updateMovieId"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
+            />
+          </div>
+          <div class="mb-4">
             <label for="movieTitle" class="block text-gray-700"
               >Filmtitel:</label
             >
@@ -103,6 +115,7 @@ import { ref } from "vue";
 const movies = ref([]);
 const movieTitle = ref("");
 const movieRating = ref("");
+const updateMovieId = ref("");
 
 const fetchMovies = async () => {
   try {
@@ -127,6 +140,7 @@ const addMovie = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        movieId: updateMovieId.value,
         movieTitle: movieTitle.value,
         movieRating: movieRating.value,
       }),
@@ -160,14 +174,14 @@ const updateMovie = async () => {
     const responseData = await response.json();
     if (responseData.success) {
       alert(responseData.message);
-      movieId.value = "";
-      movieTitle.value = "";
-      movieRating.value = "";
+      updateMovieId.value = "";
+      updateMovieTitle.value = "";
+      updateMovieRating.value = "";
     } else {
       alert(responseData.error);
     }
   } catch (error) {
-    console.error("Error adding movie:", error);
+    console.error("Error updating movie:", error);
   }
 };
 
