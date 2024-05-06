@@ -5,14 +5,8 @@
 
     <!-- Lista med filmer -->
     <div class="flex flex-col items-center">
-      <ul
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-      >
-        <li
-          v-for="movie in movies"
-          :key="movie.movieId"
-          class="bg-white rounded-lg shadow-md p-4"
-        >
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <li v-for="movie in movies" :key="movie.movieId" class="bg-white rounded-lg shadow-md p-4">
           <h2 class="text-lg font-semibold">{{ movie.movieTitle }}</h2>
           <h2 class="text-lg font-semibold">{{ movie.movieGenreId }}</h2>
 
@@ -29,32 +23,18 @@
         <!-- Formulär för att lägga till en ny film -->
         <form @submit.prevent="addMovie" class="max-w-sm mx-auto mt-8">
           <div class="mb-4">
-            <label for="movieTitle" class="block text-gray-700"
-              >Filmtitel:</label
-            >
-            <input
-              type="text"
-              id="movieTitle"
-              v-model="movieTitle"
-              required
-              class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-            />
+            <label for="movieTitle" class="block text-gray-700">Filmtitel:</label>
+            <input type="text" id="movieTitle" v-model="movieTitle" required
+              class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50" />
           </div>
           <div class="mb-4 border-gray-900">
             <label for="movieRating" class="block text-gray-700">Betyg:</label>
-            <input
-              type="text"
-              id="movieRating"
-              v-model="movieRating"
-              required
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-            />
+            <input type="text" id="movieRating" v-model="movieRating" required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50" />
           </div>
           <div class="mt-4">
-            <button
-              type="submit"
-              class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-            >
+            <button type="submit"
+              class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
               Lägg till film
             </button>
           </div>
@@ -62,44 +42,23 @@
         <!-- Formulär för att uppdatera film -->
         <form @submit.prevent="updateMovie" class="max-w-sm mx-auto mt-8">
           <div class="mb-4">
-            <label for="updateMovieId" class="block text-gray-700"
-              >Film-ID:</label
-            >
-            <input
-              type="text"
-              id="updateMovieId"
-              v-model="updateMovieId"
-              required
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-            />
+            <label for="updateMovieId" class="block text-gray-700">Film-ID:</label>
+            <input type="text" id="updateMovieId" v-model="updateMovieId" required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50" />
           </div>
           <div class="mb-4">
-            <label for="movieTitle" class="block text-gray-700"
-              >Filmtitel:</label
-            >
-            <input
-              type="text"
-              id="movieTitle"
-              v-model="updateMovieTitle"
-              required
-              class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-            />
+            <label for="movieTitle" class="block text-gray-700">Filmtitel:</label>
+            <input type="text" id="movieTitle" v-model="updateMovieTitle" required
+              class="mt-1 block w-full rounded-md border-gray-900 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50" />
           </div>
           <div class="mb-4 border-gray-900">
             <label for="movieRating" class="block text-gray-700">Betyg:</label>
-            <input
-              type="text"
-              id="movieRating"
-              v-model="updateMovieRating"
-              required
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50"
-            />
+            <input type="text" id="movieRating" v-model="updateMovieRating" required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-indigo-300 ring ring-indigo-200 ring-opacity-50" />
           </div>
           <div class="mt-4">
-            <button
-              type="submit"
-              class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-            >
+            <button type="submit"
+              class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
               Uppdatera
             </button>
           </div>
