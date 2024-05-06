@@ -2,9 +2,9 @@ const reviewModel = require("../models/reviewModel");
 
 exports.getReview = async (req, res) => {
   try {
-    console.log("Kom igen nu!");
+    // console.log("Kom igen nu!");
     const allReviews = await reviewModel.find();
-    console.log("Kom igen nu2!");
+    // console.log("Kom igen nu2!");
     return res.status(200).json(allReviews);
   } catch (error) {
     return res.status(500).json({
@@ -44,29 +44,21 @@ exports.createReview = async (req, res) => {
   }
 };
 
-exports.updateBook = async (req, res) => {
-  const {
-    bookAuthor,
-    bookTitle,
-    bookIsbn,
-    bookPrice,
-    bookCategory1,
-    bookCategory2,
-  } = req.body;
+exports.updateReview = async (req, res) => {
+  const { movie, user, rating, comment } = req.body;
 
   try {
-    await BookModel.updateOne(
-      { isbn: bookIsbn },
+    await reviewModel.updateOne(
+      { id: movieId },
       {
-        author: bookAuthor,
-        book: bookTitle,
-        isbn: bookIsbn,
-        price: bookPrice,
-        categories: [bookCategory1, bookCategory2],
+        movie: movie,
+        user: user,
+        rating: rating,
+        comment: comment
       }
     );
-    const updatedBook = await BookModel.find({ isbn: bookIsbn });
-    return res.status(200).json(updatedBook);
+    const updatedReview = await reviewModel.find({ id: movieId });
+    return res.status(200).json(updatedReview);
   } catch (error) {
     return res.status(500).json({
       error: error.message,
@@ -74,11 +66,11 @@ exports.updateBook = async (req, res) => {
   }
 };
 
-exports.deleteBook = async (req, res) => {
+exports.deleteReview = async (req, res) => {
   const { bookIsbn } = req.body;
   try {
-    const deletedBook = await BookModel.deleteOne({ isbn: bookIsbn });
-    return res.status(200).json(deletedBook);
+    const deleteReview = await reviewModel.deleteOne({ id: movieId });
+    return res.status(200).json(deleteReview);
   } catch (error) {
     return res.status(500).json({
       error: error.message,
@@ -86,11 +78,11 @@ exports.deleteBook = async (req, res) => {
   }
 };
 
-exports.getBooksById = async (req, res) => {
+exports.getReviewsById = async (req, res) => {
   const { id } = req.params;
   try {
-    const book = await BookModel.findById(id);
-    return res.status(200).json(book);
+    const getReview = await reviewModel.findById(id);
+    return res.status(200).json(review);
   } catch (error) {
     return res.status(500).json({
       error: error.message,
@@ -98,11 +90,11 @@ exports.getBooksById = async (req, res) => {
   }
 };
 
-exports.deleteBookById = async (req, res) => {
+exports.deleteReviewById = async (req, res) => {
   const { id } = req.body;
   try {
-    const deletedBook = await BookModel.findByIdAndDelete(id);
-    return res.status(200).json(deletedBook);
+    const deletedReview = await reviewModel.findByIdAndDelete(id);
+    return res.status(200).json(deletedReview);
   } catch (error) {
     return res.status(500).json({
       error: error.message,
