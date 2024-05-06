@@ -45,10 +45,10 @@ exports.createReview = async (req, res) => {
 };
 
 exports.updateReview = async (req, res) => {
-  const { movie, user, rating, comment } = req.body;
+  const { id, movie, user, rating, comment } = req.body;
 
   try {
-    await reviewModel.updateOne(
+    await reviewModel.updateOne({ id: id },
       {
         movie: movie,
         user: user,
