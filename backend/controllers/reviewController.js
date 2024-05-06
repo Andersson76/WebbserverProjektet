@@ -49,7 +49,6 @@ exports.updateReview = async (req, res) => {
 
   try {
     await reviewModel.updateOne(
-      { id: movieId },
       {
         movie: movie,
         user: user,
@@ -57,7 +56,7 @@ exports.updateReview = async (req, res) => {
         comment: comment
       }
     );
-    const updatedReview = await reviewModel.find({ id: movieId });
+    const updatedReview = await reviewModel.find();
     return res.status(200).json(updatedReview);
   } catch (error) {
     return res.status(500).json({
@@ -67,7 +66,7 @@ exports.updateReview = async (req, res) => {
 };
 
 exports.deleteReview = async (req, res) => {
-  const { bookIsbn } = req.body;
+  const { movieId } = req.body;
   try {
     const deleteReview = await reviewModel.deleteOne({ id: movieId });
     return res.status(200).json(deleteReview);
