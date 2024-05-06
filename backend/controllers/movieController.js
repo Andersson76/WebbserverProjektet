@@ -75,16 +75,8 @@ exports.updateMovie = async (req, res) => {
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
   let sql =
-    "UPDATE movies SET movieTitle = ?, movieRating = ?, movieDirectorId = ?, movieGenreId = ?, movieWriterId = ?, movieMainActorId = ? WHERE movieId = ?";
-  let params = [
-    movieId,
-    movieTitle,
-    movieRating,
-    movieDirectorId,
-    movieGenreId,
-    movieWriterId,
-    movieMainActorId,
-  ];
+    "UPDATE movies SET movieTitle = ?, movieRating = ? WHERE movieId = ?";
+  let params = [movieTitle, movieRating, movieId];
 
   if (!movieRating || movieRating.trim().length < 3) {
     return res.status(400).json({
