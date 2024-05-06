@@ -74,7 +74,7 @@
             />
           </div>
           <div class="mb-4">
-            <label for="movieTitle" class="block text-gray-700"
+            <label for="updateMovieTitle" class="block text-gray-700"
               >Filmtitel:</label
             >
             <input
@@ -86,7 +86,9 @@
             />
           </div>
           <div class="mb-4 border-gray-900">
-            <label for="movieRating" class="block text-gray-700">Betyg:</label>
+            <label for="updateMovieRating" class="block text-gray-700"
+              >Betyg:</label
+            >
             <input
               type="text"
               id="movieRating"
