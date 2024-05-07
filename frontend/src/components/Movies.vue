@@ -18,7 +18,7 @@
 
           <p class="text-gray-500">{{ movie.movieRating }}</p>
           <button
-            @click="deleteMovie(movieId)"
+            @click="deleteMovie(movie.movieId)"
             class="bg-red-500 text-white px-4 py-2 rounded mt-2"
           >
             Ta bort
@@ -195,6 +195,7 @@ const updateMovie = async () => {
 };
 
 const deleteMovie = async (id) => {
+  console.log("Deleting movie with ID:", id);
   try {
     const response = await fetch(`http://localhost:3000/api/movies/${id}`, {
       method: "DELETE",
