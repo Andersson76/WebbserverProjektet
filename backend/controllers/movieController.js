@@ -114,7 +114,6 @@ exports.deleteMovie = async (req, res) => {
   const { id } = req.body;
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
-  let sql = "DELETE  FROM movies WHERE movieId = ?";
 
   if (!id) {
     return res.status(400).json({
@@ -124,6 +123,7 @@ exports.deleteMovie = async (req, res) => {
   }
 
   try {
+    let sql = "DELETE  FROM movies WHERE movieId = ?";
     await connectionMySQL.query(sql, [id], (error, results, fields) => {
       if (error) {
         if (error) throw error;

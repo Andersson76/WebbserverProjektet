@@ -17,12 +17,12 @@
           <h2 class="text-lg font-semibold">{{ movie.movieGenreId }}</h2>
 
           <p class="text-gray-500">{{ movie.movieRating }}</p>
-          <!-- <button
+          <button
             @click="deleteMovie(movieId)"
             class="bg-red-500 text-white px-4 py-2 rounded mt-2"
           >
             Ta bort
-          </button> -->
+          </button>
         </li>
       </ul>
       <div class="flex justify-center gap-4 my-8">
@@ -192,11 +192,12 @@ const updateMovie = async () => {
   }
 };
 
-/* const deleteMovie = async (id) => {
+const deleteMovie = async (id) => {
   try {
     const response = await fetch(`http://localhost:3000/api/movies/${id}`, {
       method: "DELETE",
     });
+    console.log(response);
     if (!response.ok) {
       throw new Error("Failed to delete movie");
     }
@@ -204,7 +205,7 @@ const updateMovie = async () => {
   } catch (error) {
     console.error(error);
   }
-}; */
+};
 
 fetchMovies(); // Hämta filmer när komponenten skapas
 </script>
