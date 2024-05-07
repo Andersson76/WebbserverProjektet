@@ -68,8 +68,6 @@
 </template>
 
 <script setup>
-import axios from "axios";
-
 import { ref } from "vue";
 import { onMounted } from "vue";
 
@@ -81,8 +79,9 @@ const reviews = ref([]);
 
 const fetchReviews = async () => {
   try {
-    const response = await axios.get("/api/reviews");
-    reviews.value = response.data;
+    const response = await fetch("/api/reviews");
+    const data = await response.json();
+    reviews.value = data;
   } catch (error) {
     console.error("Error fetching reviews:", error);
   }
@@ -90,11 +89,17 @@ const fetchReviews = async () => {
 
 const submitReview = async () => {
   try {
-    await axios.post("/api/reviews", {
-      movie: movie.value,
-      user: user.value,
-      rating: rating.value,
-      comment: comment.value,
+    await fetch("/api/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        movie: movie.value,
+        user: user.value,
+        rating: rating.value,
+        comment: comment.value,
+      }),
     });
     fetchReviews();
     movie.value = "";
