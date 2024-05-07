@@ -155,6 +155,7 @@ const addMovie = async () => {
       alert(responseData.message);
       movieTitle.value = "";
       movieRating.value = "";
+      window.location.reload();
     } else {
       alert(responseData.error);
     }
@@ -184,6 +185,7 @@ const updateMovie = async () => {
       updateMovieId.value = "";
       updateMovieTitle.value = "";
       updateMovieRating.value = "";
+      window.location.reload();
     } else {
       alert(responseData.error);
     }
