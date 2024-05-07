@@ -79,7 +79,7 @@ const reviews = ref([]);
 
 const fetchReviews = async () => {
   try {
-    const response = await fetch("/api/reviews");
+    const response = await fetch("http://localhost:3000/api/reviews");
     const data = await response.json();
     reviews.value = data;
   } catch (error) {
@@ -89,7 +89,7 @@ const fetchReviews = async () => {
 
 const submitReview = async () => {
   try {
-    await fetch("/api/reviews", {
+    await fetch("http://localhost:3000/api/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
