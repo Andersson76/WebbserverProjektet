@@ -1,50 +1,66 @@
 <template>
-  <div class="bg-white">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Review form -->
+    <form @submit.prevent="submitReview" class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Skapa en ny recension</h2>
+      <div class="flex flex-col mb-4">
+        <label for="movie" class="font-semibold mb-2">Film:</label>
+        <input
+          type="text"
+          v-model="movie"
+          id="movie"
+          class="border rounded px-2 py-1"
+        />
+      </div>
+      <div class="flex flex-col mb-4">
+        <label for="user" class="font-semibold mb-2">Användare:</label>
+        <input
+          type="text"
+          v-model="user"
+          id="user"
+          class="border rounded px-2 py-1"
+        />
+      </div>
+      <div class="flex flex-col mb-4">
+        <label for="rating" class="font-semibold mb-2">Betyg:</label>
+        <input
+          type="number"
+          v-model="rating"
+          id="rating"
+          class="border rounded px-2 py-1"
+        />
+      </div>
+      <div class="flex flex-col mb-4">
+        <label for="comment" class="font-semibold mb-2">Kommentar:</label>
+        <textarea
+          v-model="comment"
+          id="comment"
+          rows="4"
+          class="border rounded px-2 py-1"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+      >
+        Skicka
+      </button>
+    </form>
+
+    <!-- Reviews -->
     <div>
-      <h2 class="sr-only">Customer Reviews</h2>
-
-      <div class="-my-10">
+      <h2 class="text-xl font-semibold mb-4">Recensioner</h2>
+      <div v-if="reviews.length === 0">Inga recensioner tillgängliga</div>
+      <div v-else>
         <div
-          v-for="(review, reviewIdx) in reviews"
-          :key="review.id"
-          class="flex space-x-4 text-sm text-gray-500"
+          v-for="(review, index) in reviews"
+          :key="index"
+          class="border mb-4 p-4"
         >
-          <div class="flex-none py-10">
-            <img
-              :src="review.avatarSrc"
-              alt=""
-              class="h-10 w-10 rounded-full bg-gray-100"
-            />
-          </div>
-          <div
-            :class="[
-              reviewIdx === 0 ? '' : 'border-t border-gray-200',
-              'flex-1 py-10',
-            ]"
-          >
-            <h3 class="font-medium text-gray-900">{{ review.author }}</h3>
-            <p>
-              <time :datetime="review.datetime">{{ review.date }}</time>
-            </p>
-
-            <div class="mt-4 flex items-center">
-              <StarIcon
-                v-for="rating in [0, 1, 2, 3, 4]"
-                :key="rating"
-                :class="[
-                  review.rating > rating ? 'text-yellow-400' : 'text-gray-300',
-                  'h-5 w-5 flex-shrink-0',
-                ]"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="sr-only">{{ review.rating }} out of 5 stars</p>
-
-            <div
-              class="prose prose-sm mt-4 max-w-none text-gray-500"
-              v-html="review.content"
-            />
-          </div>
+          <h3 class="text-lg font-semibold">{{ review.movie }}</h3>
+          <p class="text-gray-600">Användare: {{ review.user }}</p>
+          <p class="text-gray-600">Betyg: {{ review.rating }}</p>
+          <p>{{ review.comment }}</p>
         </div>
       </div>
     </div>
@@ -52,33 +68,43 @@
 </template>
 
 <script setup>
-import { StarIcon } from "@heroicons/vue/20/solid";
+import axios from "axios";
 
-const reviews = [
-  {
-    id: 1,
-    rating: 5,
-    content: `
-      <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-    `,
-    date: "July 16, 2021",
-    datetime: "2021-07-16",
-    author: "Emily Selman",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-  },
-  {
-    id: 2,
-    rating: 5,
-    content: `
-      <p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>
-    `,
-    date: "July 12, 2021",
-    datetime: "2021-07-12",
-    author: "Hector Gibbons",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-  },
-  // More reviews...
-];
+import { ref } from "vue";
+import { onMounted } from "vue";
+
+const movie = ref("");
+const user = ref("");
+const rating = ref(0);
+const comment = ref("");
+const reviews = ref([]);
+
+const fetchReviews = async () => {
+  try {
+    const response = await axios.get("/api/reviews");
+    reviews.value = response.data;
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+  }
+};
+
+const submitReview = async () => {
+  try {
+    await axios.post("/api/reviews", {
+      movie: movie.value,
+      user: user.value,
+      rating: rating.value,
+      comment: comment.value,
+    });
+    fetchReviews();
+    movie.value = "";
+    user.value = "";
+    rating.value = 0;
+    comment.value = "";
+  } catch (error) {
+    console.error("Error submitting review:", error);
+  }
+};
+
+onMounted(fetchReviews);
 </script>

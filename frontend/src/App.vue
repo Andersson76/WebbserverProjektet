@@ -1,5 +1,5 @@
 <template>
-  <HelloWorld msg="Webb_Server" />
+  <HelloWorld msg="WebbServerProject" />
   <Movies />
   <Reviews />
 </template>
