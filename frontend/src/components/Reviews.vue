@@ -122,12 +122,10 @@ const submitReview = async () => {
 };
 const deleteReview = async (index) => {
   try {
-    await fetch(
-      `http://localhost:3000/api/reviews/${reviews.value[index]._id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const reviewId = reviews.value[index]._id;
+    await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
+      method: "DELETE",
+    });
     fetchReviews();
   } catch (error) {
     console.error("Error deleting review:", error);
