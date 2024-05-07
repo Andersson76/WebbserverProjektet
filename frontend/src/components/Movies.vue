@@ -11,7 +11,7 @@
         <li
           v-for="movie in movies"
           :key="movie.movieId"
-          class="bg-white rounded-lg shadow-md p-4"
+          class="bg-white rounded-lg shadow-md p-4 border-solid border-2 border-seashell-500"
         >
           <h2 class="text-lg font-semibold">{{ movie.movieTitle }}</h2>
           <h2 class="text-lg font-semibold">{{ movie.movieGenreId }}</h2>
@@ -19,7 +19,7 @@
           <p class="text-gray-500">{{ movie.movieRating }}</p>
           <button
             @click="deleteMovie(movie.movieId)"
-            class="bg-red-500 text-white px-4 py-2 rounded mt-2"
+            class="bg-red-500 text-white px-4 py-2 rounded mt-2 border-solid border-2 border-black-500 drop-shadow-md"
           >
             Ta bort
           </button>
