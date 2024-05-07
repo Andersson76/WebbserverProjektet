@@ -1,3 +1,5 @@
+USE webbproject;
+
 CREATE TABLE genre
 (
     genreId   INT NOT NULL AUTO_INCREMENT,
@@ -5,7 +7,7 @@ CREATE TABLE genre
     PRIMARY KEY (genreId)
 );
 
-CREATE TABLE director
+CREATE TABLE directors
 (
     directorId   INT NOT NULL AUTO_INCREMENT,
     directorName VARCHAR(50) UNIQUE,
@@ -59,10 +61,34 @@ VALUES ('The Green Mile', 1),
 
 SELECT * FROM movies;
 
+-- Lägger till writers
 INSERT INTO writers (writerName)
 VALUES ('Stephen King'), ('David S. Goyer'), ('Tony Kushner'), ('Howard Klausner');
 
 SELECT * from writers;
+
+-- Lägger till directors
+INSERT INTO directors (directorName)
+VALUES ('Frank Darabont'),('Tim Miller'),('Steven Spielberg'),('Jerry Hogrewe');
+
+SELECT * FROM directors;
+
+-- Lägger till directors till movies
+UPDATE movies
+SET movieDirectorId = (SELECT directorId FROM directors WHERE directorName = 'Frank Darabont')
+WHERE movieTitle = 'The Green Mile';
+
+UPDATE movies
+SET movieDirectorId = (SELECT movieDirectorId FROM directors WHERE directorName = 'Tim Miller')
+WHERE movieTitle = 'Terminator, Dark Fate';
+
+UPDATE movies
+SET movieDirectorId = (SELECT movieDirectorId FROM directors WHERE directorName = 'Steven Spielberg')
+WHERE movieTitle = 'West Side Story';
+
+UPDATE movies
+SET movieDirectorId = (SELECT movieDirectorId FROM directors WHERE directorName = 'Jerry Hogrewe')
+WHERE movieTitle = 'Dirty Harry, The Original';
 
 -- Lägger till movieRating och uppdaterar movieTitle
 UPDATE movies
@@ -80,7 +106,7 @@ SET movieRating= 6.7, movieTitle= 'Dirty Harry, The Original', movieWriterId= 4 
 SELECT * FROM movies;
 SELECT * FROM mainActor;
 
--- Skådespelare för The Green Mile
+-- Lägger till skådespelare
 INSERT INTO mainActor (mainActorName)
 VALUES
 ('Tom Hanks'),
@@ -131,3 +157,7 @@ WHERE movieTitle = 'Dirty Harry, The Original';
 SELECT movieTitle, mainActorName
 FROM movies
 JOIN mainActor a ON movieMainActorId = a.mainActorId;
+
+SELECT movieTitle, directorName
+FROM movies
+JOIN directors a ON movieDirectorId = a.directorId;
