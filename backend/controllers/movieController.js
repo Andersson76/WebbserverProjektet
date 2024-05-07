@@ -112,7 +112,7 @@ exports.updateMovie = async (req, res) => {
 };
 
 exports.deleteMovie = async (req, res) => {
-  const { id } = req.body;
+  const id = req.params.id;
 
   // Vi använder Prepared Statements genom ? i SQL-koden och att ange paramatern i query-funktionen
 
