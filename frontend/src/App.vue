@@ -1,12 +1,11 @@
 <template>
-
-    <HelloWorld msg="Webb_Server" />
-    <Movies />
-
+  <HelloWorld msg="Webb_Server" />
+  <Movies />
+  <Reviews />
 </template>
 
 <script setup>
 import HelloWorld from "./components/HelloWorld.vue";
 import Movies from "./components/Movies.vue";
-
+import Reviews from "./components/Reviews.vue";
 </script>
