@@ -1,5 +1,7 @@
 <template>
-  <div class="container mx-auto p-4 text-2xl font-bold lg:text-4xl">
+  <div
+    class="container mx-auto p-4 text-2xl font-bold lg:text-4xl shadow-lg bg-gradient-to-br from-gray-100 to-gray-300"
+  >
     <!-- Rubrik "Filmer" -->
     <h1 class="text-center my-8">Filmer</h1>
 
