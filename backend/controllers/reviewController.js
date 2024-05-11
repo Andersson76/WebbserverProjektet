@@ -48,12 +48,13 @@ exports.updateReview = async (req, res) => {
   const { id, movie, user, rating, comment } = req.body;
 
   try {
-    await reviewModel.updateOne({ id: id },
+    await reviewModel.updateOne(
+      { id: id },
       {
         movie: movie,
         user: user,
         rating: rating,
-        comment: comment
+        comment: comment,
       }
     );
     const updatedReview = await reviewModel.find();
@@ -66,9 +67,9 @@ exports.updateReview = async (req, res) => {
 };
 
 exports.deleteReview = async (req, res) => {
-  const { movieId } = req.body;
+  const { id } = req.params; // Hämta ID från URL:params
   try {
-    const deleteReview = await reviewModel.deleteOne({ id: movieId });
+    const deleteReview = await reviewModel.deleteOne({ _id: id }); // Använd _id för att söka efter recensionen
     return res.status(200).json(deleteReview);
   } catch (error) {
     return res.status(500).json({
