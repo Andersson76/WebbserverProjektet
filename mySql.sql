@@ -53,6 +53,7 @@ INSERT INTO genre (genreName) VALUES
  ('Musical'),
  ('Western');
 
+-- Lägger till genre till movies
 INSERT INTO movies (movieTitle, movieGenreID)
 VALUES ('The Green Mile', 1),
        ('Terminator', 2),
@@ -73,33 +74,32 @@ VALUES ('Frank Darabont'),('Tim Miller'),('Steven Spielberg'),('Jerry Hogrewe');
 
 SELECT * FROM directors;
 
--- Lägger till directors till movies
+-- Lägger till director till movies
 UPDATE movies
-SET movieDirectorId = (SELECT directorId FROM directors WHERE directorName = 'Frank Darabont')
-WHERE movieTitle = 'The Green Mile';
+SET directorName = 'Frank Darabont' WHERE movieTitle = 'The Green Mile';
 
 UPDATE movies
-SET movieDirectorId = (SELECT directorId FROM directors WHERE directorName = 'Tim Miller')
-WHERE movieTitle = 'Terminator, Dark Fate';
+SET directorName = 'Tim Miller' WHERE movieTitle = 'Terminator, Dark Fate';
 
 UPDATE movies
-SET movieDirectorId = (SELECT directorId FROM directors WHERE directorName = 'Steven Spielberg')
-WHERE movieTitle = 'West Side Story';
+SET directorName = 'Steven Spielberg' WHERE movieTitle = 'West Side Story';
 
 UPDATE movies
-SET movieDirectorId = (SELECT directorId FROM directors WHERE directorName = 'Jerry Hogrewe')
-WHERE movieTitle = 'Dirty Harry, The Original';
+SET directorName = 'Jerry Hogrewe' WHERE movieTitle = 'Dirty Harry, The Original';
 
--- Lägger till movieRating och uppdaterar movieTitle
+-- Lägger till movieRating och writer till movies
 UPDATE movies
 SET movieRating= 8.6, movieWriterId= 1 WHERE movieId= 1;
 
+---- Lägger till movieRating och writer och uppdaterar movieTitle till movies
 UPDATE movies
 SET movieRating= 6.2, movieTitle= 'Temninator, Dark Fate', movieWriterId= 2 WHERE movieId= 2;
 
+---- Lägger till movieRating och writer till movies
 UPDATE movies
 SET movieRating= 7.1, movieWriterId= 3 WHERE movieId= 3;
 
+-- Lägger till movieRating och writer och uppdaterar movieTitle till movies
 UPDATE movies
 SET movieRating= 6.7, movieTitle= 'Dirty Harry, The Original', movieWriterId= 4 WHERE movieId= 4;
 
@@ -155,10 +155,6 @@ WHERE movieTitle = 'Dirty Harry, The Original';
 SELECT movieTitle, mainActorName
 FROM movies
 JOIN mainActor a ON movieMainActorId = a.mainActorId;
-
-SELECT movieTitle, directorName
-FROM movies
-JOIN directors a ON movieDirectorId = a.directorId;
 
 SELECT * FROM movies;
 SELECT * FROM genre;
